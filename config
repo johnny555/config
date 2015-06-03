@@ -1,0 +1,14 @@
+Host *
+ControlMaster auto
+ControlPath ~/.ssh/tmp/%r%h:%p
+
+Host nas
+User root
+HostName 192.168.1.105
+IdentityFile ~/.ssh/id_rsa
+LocalForward 9999 localhost:1443
+LocalForward 5555 localhost:5555
+ProxyCommand ssh opium nc %h %p
+LocalForward 5900 localhost:5900
+
+
