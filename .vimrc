@@ -23,11 +23,19 @@ augroup vimrc_autocmds
 	autocmd FileType python set nowrap
 augroup END
 
+
+Plugin 'derekwyatt/vim-scala'
 Bundle 'jellybeans.vim'
 Bundle 'jnurmine/Zenburn'
 Bundle 'rosenfeld/conque-term'
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'Shutnik/jshint2.vim'
+Bundle 'ap/vim-css-color'
+Bundle 'laurilehmijoki/haskellmode-vim'
+Bundle 'scrooloose/syntastic'
+Bundle 'vim-scripts/VimIRC.vim'
+Bundle 'ternjs/tern_for_vim'
 
 set spell spelllang=en_us
 
@@ -104,6 +112,7 @@ Bundle 'majutsushi/tagbar'
 Bundle 'fs111/pydoc.vim'
 "Bundle 'davidhalter/jedi-vim'
 Bundle 'scrooloose/nerdtree'
+Bundle 'lervag/vimtex'
 
 
 " All plugins must be defined by now!
@@ -117,8 +126,11 @@ map <F2> :NERDTreeToggle<CR>
 set nu
 "set relativenumber
 
+" JSHint definitions
 
 
+let jshint2_read = 1
+let jshint2_save = 1
 
 
 " Use <leader>l to toggle display of whitespace
@@ -159,3 +171,28 @@ nmap Q gqap
 
 
 colorscheme zenburn
+
+
+" Haskell Vim Mode.
+
+au Bufenter *.hs compiler ghc
+syntax on
+filetype plugin on
+
+let g:haddock_browser = "firefox"
+let g:haddock_browes = "open"
+let g:haddock_browser_callformat = "%s %s"
+
+" Syntastic
+
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_haskell_checkers = ['ghdev-tools']
